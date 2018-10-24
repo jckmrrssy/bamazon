@@ -17,6 +17,7 @@ let connection = mysql.createConnection({
       if (err) throw err;
     //   console.log("connected as id " + connection.threadId + "\n");
         console.log("\nWelcome to Bamazon Grocery!\n");
+        displayProducts();
   });
 
 //   Display products avaialable for purhcase to the customer 
@@ -38,6 +39,8 @@ let connection = mysql.createConnection({
       inquirerCustomer();
   }
 
+  
+  
   function inquirerCustomer () {
     inquirer.prompt([
         {
@@ -77,7 +80,6 @@ let connection = mysql.createConnection({
     });
   };
   
-  displayProducts();
-  
+ 
   
   
