@@ -25,7 +25,7 @@ function managerPrompt () {
         type: "list",
         message: "What would you like to do?",
         choices: ["View products for sale", "View low inventory",
-                    "Add to inventory", "Add new product"]
+                    "Add to inventory", "Add new product", "Exit"]
         }
     ]).then(function(selection) {
         
@@ -40,6 +40,9 @@ function managerPrompt () {
         }
         else if (selection.managerOptions === "Add new product") {
             newProduct();
+        }
+        else if (selection.managerOptions === "Exit") {
+            connection.end();
         }
     });
 };
@@ -60,6 +63,7 @@ function viewAll () {
                 );
             };
     });
+    // managerPrompt();
 };
 
 function viewLow () {
@@ -78,8 +82,36 @@ function viewLow () {
                 );
         };
     });
+    // managerPrompt();
 };
 
-function updateInventory () {};
+function updateInventory () {
+    inquirer.prompt([
+        {
+            name: "itemId",
+            message: "Please enter the ID of the product you want to add"
+        }, {
+            name: "amount",
+            message: "How many are you adding?"
+        }
+    ]).then(function(response) {
+        connection.query("SELECT * FROM products WHERE id =" + response.itemId, function(err, res) {
+            if (err) throw err;
+            
+        let newQuant = res[0].stock_quantity + response.amount;
 
-function newProduct () {};
+        connection.query(
+            "UPDATE products SET ? WHERE ?",
+            [{stock_quantity: newQuant},
+            {id: response.itemId}], function(err, res) {
+                if (err) throw err;
+            })
+            console.log("Successfully updated inventory!");
+            setTimeout(function() {managerPrompt()}, 5000);
+        
+        })
+    });
+    // managerPrompt();
+}
+// function newProduct () {};
+
