@@ -50,19 +50,35 @@ function viewAll () {
         console.log("Current Inventory (Manager View)");
 
         for (let record in res) {
-            let product = res[record]
+            let product = res[record];
             console.log(
                 "Product ID:", product.id, "|",
                 "Product:", product.product_name, "|",
                 "Department:", product.department_name, "|",
                 "Price ($):", product.price, "|",
                 "Inventory", product.stock_quantity, "|"
-                )
-            }
-    })
+                );
+            };
+    });
 };
 
-function viewLow () {};
+function viewLow () {
+    connection.query("SELECT * FROM products WHERE stock_quantity < 5", function(err, res) {
+        if (err) throw err;
+        console.log("Low Inventory (less than 5 remaining)");
+
+        for (let rec in res) {
+            let product = res[rec];
+            console.log(
+                "Product ID:", product.id, "|",
+                "Product:", product.product_name, "|",
+                "Department:", product.department_name, "|",
+                "Price ($):", product.price, "|",
+                "Inventory", product.stock_quantity, "|"
+                );
+        };
+    });
+};
 
 function updateInventory () {};
 
