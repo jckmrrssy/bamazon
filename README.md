@@ -1,6 +1,6 @@
 # Bamazon
 
-This is an online shopping like application that uses a SQL database for inventory management. It has three "views" - one for customers, one for managers, and one for a supervisor. 
+This is an online shopping-like application that uses a SQL database for inventory management. It has three "views" - one for customers, one for managers, and one for a supervisor. 
 
 The app allows customers to purchase items, which are displayed to them with a description and price. When a customer makes a purchase, the database will update the inventory accordingly. If there are not enough units available to satisfy a customers order, they will receive an error message letting them know. 
 
@@ -9,6 +9,8 @@ Managers are allowed more robust access to the database, allowing them to see a 
 The supervisor view will be a view displaying the different managers, and a record of their interactions with the inventory database.
 
 ## Check out a demo [here](https://drive.google.com/file/d/15aQbYvowNsAjcnCKQgbHt0kQUdtfdwOV/view)
+
+![image](./bamazon.png)
 
 ## Installing
 
